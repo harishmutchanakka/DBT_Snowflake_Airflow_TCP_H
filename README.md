@@ -1,20 +1,39 @@
-<<<<<<< HEAD
-Welcome to your new dbt project!
+# Sales Analytics Pipeline
+## dbt · Snowflake · Apache Airflow
 
-### Using the starter project
+End-to-end ELT pipeline processing 1.5M orders from TPC-H dataset using dbt for transformation, Snowflake as the cloud warehouse, and Apache Airflow for orchestration.
 
-Try running the following commands:
-- dbt run
-- dbt test
+---
 
+## Architecture
+![Lineage Graph](lineage_graph.png)
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
-=======
-# DBT_Snowflake_Airflow_TCP_H
-Data Engineering project using Snowflake, dbt, Airflow, and GitHub to build and orchestrate modern ELT pipelines.
->>>>>>> 19353652e5638c048702c942d45d1844d5c50f07
+## Stack
+| Layer | Tool |
+|---|---|
+| Warehouse | Snowflake (Azure) |
+| Transformation | dbt-core 1.11, dbt_utils, dbt_expectations |
+| Orchestration | Apache Airflow 2.6.3 |
+| Source Data | TPC-H SF1 — 1.5M orders, 6M line items |
+| Version Control | GitHub |
+
+## dbt Project Includes
+- 5 staging models with sources.yml
+- 1 intermediate model (ephemeral CTE)
+- fct_orders — incremental fact table (1.5M rows)
+- dim_customers — enriched dimension (150K rows)
+- customer_snapshot — SCD Type 2 history tracking
+- order_priority_tiers — seed CSV
+- 2 custom Jinja macros
+- dbt_utils + dbt_expectations data quality tests
+- 25 passing data tests
+- Full column-level documentation
+
+## Screenshots
+### dbt Lineage Graph
+![Lineage Graph](lineage_graph.png)
+
+### Airflow DAG — All Tasks Green
+![Airflow DAG](airflow_dag.png)
+
+## How to Run Locally
