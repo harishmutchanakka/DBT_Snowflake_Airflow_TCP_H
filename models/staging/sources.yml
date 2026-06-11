@@ -1,0 +1,13 @@
+version: 2
+sources:
+  - name: raw
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCH_SF1
+    description: "Raw TPC-H sample data built into Snowflake"
+    tables:
+      - name: orders
+      - name: lineitem
+      - name: customer
+      - name: nation
+      - name: region
+      - name: supplier

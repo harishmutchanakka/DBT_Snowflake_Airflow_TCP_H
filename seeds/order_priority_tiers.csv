@@ -1,0 +1,6 @@
+priority,tier,sla_hours
+1-URGENT,platinum,4
+2-HIGH,gold,8
+3-MEDIUM,silver,24
+4-NOT SPECIFIED,bronze,72
+5-LOW,bronze,96

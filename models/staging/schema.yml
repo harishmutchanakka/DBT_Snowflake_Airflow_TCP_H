@@ -1,0 +1,26 @@
+version: 2
+models:
+  - name: stg_orders
+    columns:
+      - name: order_id
+        tests: [unique, not_null]
+      - name: customer_id
+        tests: [not_null]
+  - name: stg_customer
+    columns:
+      - name: customer_id
+        tests: [unique, not_null]
+  - name: stg_lineitem
+    columns:
+      - name: order_id
+        tests: [not_null]
+      - name: line_number
+        tests: [not_null]
+  - name: stg_nation
+    columns:
+      - name: nation_id
+        tests: [unique, not_null]
+  - name: stg_region
+    columns:
+      - name: region_id
+        tests: [unique, not_null]

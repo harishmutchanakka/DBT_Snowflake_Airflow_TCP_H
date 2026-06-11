@@ -1,0 +1,22 @@
+version: 2
+exposures:
+  - name: sales_analytics_dashboard
+    type: dashboard
+    maturity: high
+    description: "Revenue and order analytics for Finance and Sales leadership"
+    depends_on:
+      - ref('fct_orders')
+      - ref('dim_customers')
+    owner:
+      name: Harish M
+      email: harisbabu.373@gmail.com
+
+  - name: customer_churn_model
+    type: ml
+    maturity: medium
+    description: "ML model consuming customer features for churn prediction"
+    depends_on:
+      - ref('dim_customers')
+    owner:
+      name: Harish M
+      email: harisbabu.373@gmail.com

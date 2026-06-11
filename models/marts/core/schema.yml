@@ -1,0 +1,66 @@
+version: 2
+models:
+  - name: fct_orders
+    description: "Fact table with one row per order. Incremental daily load."
+    columns:
+      - name: order_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: total_net_revenue
+        description: "Total net revenue for the order"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 0
+                max_value: 10000000
+      - name: status
+        description: "Order status O=Open F=Fulfilled P=Pending"
+        tests:
+          - accepted_values:
+              values: ['O', 'F', 'P']
+      - name: total_line_items
+        description: "Total number of line items in the order"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 1
+                max_value: 7
+      - name: customer_id
+        description: "Foreign key to dim_customers"
+        tests:
+          - not_null
+      - name: order_date
+        description: "Date the order was placed"
+        tests:
+          - not_null
+      - name: loaded_at
+        description: "Timestamp when this row was loaded in KL timezone"
+
+  - name: dim_customers
+    description: "Customer dimension enriched with nation and region"
+    columns:
+      - name: customer_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+        description: "Full name of the customer"
+        tests:
+          - not_null
+      - name: market_segment
+        description: "Market segment the customer belongs to"
+        tests:
+          - not_null
+      - name: nation
+        description: "Nation the customer is from"
+        tests:
+          - not_null
+      - name: region
+        description: "Geographic region"
+        tests:
+          - accepted_values:
+              values: ['AFRICA', 'AMERICA', 'ASIA', 'EUROPE', 'MIDDLE EAST']
