@@ -6,7 +6,7 @@ End-to-end ELT pipeline processing 1.5M orders from TPC-H dataset using dbt for 
 ---
 
 ## Architecture
-![Lineage Graph](lineage_graph.png)
+![Lineage Graph](screenshots/lineage_graph.png)
 
 ## Stack
 | Layer | Tool |
@@ -30,9 +30,6 @@ End-to-end ELT pipeline processing 1.5M orders from TPC-H dataset using dbt for 
 - Full column-level documentation
 
 ## Screenshots
-
-### dbt Lineage Graph
-![Lineage Graph](screenshots/lineage_graph.png)
 
 ### dbt Lineage Graph — Full Detail with Exposures
 ![Lineage Graph Detailed](screenshots/lineage_graph_detailed.png)
